@@ -7,27 +7,36 @@ import org.apache.logging.log4j.Logger;
 
 public class Calculator {
 
-	public static int add(String input) {
+	public static int add(String input) throws Exception {
 
-		if (input.isEmpty()) {
+		if (input.isEmpty())
 			return 0;
-		} else if (input.startsWith("//")) {
+		else if (Pattern.compile("T(-?[0-9]+)").matcher(input).matches())
+			throw new RuntimeException("Negatives not allowed!");
+		else if (input.startsWith("//")) {
 			String[] arr = customDelimeter(input);
-			System.out.println("arr" + arr);
-			int sum = 0;
-			for (int i = 0; i < arr.length; i++)
-				sum += toInt(arr[i]);
-			return sum;
+			return sum(input, arr);
 		} else {
 			String[] arr = input.split(",|\n");
-			int sum = 0;
-			for (int i = 0; i < arr.length; i++)
-				sum += toInt(arr[i]);
-			if(sum > 0)
-				return sum;
-			else
-				return toInt(input);
+			return sum(input, arr);
 		}
+	}
+
+	/**
+	 * @param input
+	 * @param arr
+	 * @param sum
+	 * @return
+	 * @throws NumberFormatException
+	 */
+	private static int sum(String input, String[] arr) throws NumberFormatException {
+		int sum = 0;
+		for (int i = 0; i < arr.length; i++)
+			sum += toInt(arr[i]);
+		if (sum > 0)
+			return sum;
+		else
+			return toInt(input);
 	}
 
 	/**
@@ -39,7 +48,6 @@ public class Calculator {
 		m.matches();
 		String delimeter = m.group(1);
 		String numbers = m.group(2);
-		System.out.println("delimeter" + delimeter + "numbers" + numbers);
 		return numbers.split(delimeter);
 	}
 
