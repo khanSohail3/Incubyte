@@ -17,9 +17,19 @@ class CalculatorApplicationTests {
 	public void checkNumberOnNumber() {
 		assertEquals(1, Calculator.add("1"));
 	}
-	
+
 	@Test
 	public void checkSumOnNumbersCommaSeparated() {
-		assertEquals(3, Calculator.add("1,2"));
+		assertEquals(13, Calculator.add("8,5"));
+	}
+
+	@Test
+	public void checkSumOnMultipleNumbersCommaSeparated() {
+		assertEquals(10, Calculator.add("1,2,3,4"));
+	}
+
+	@Test
+	public void checkSumOnNewLineDelimeter() {
+		assertEquals(13, Calculator.add("1,2\n10"));
 	}
 }
