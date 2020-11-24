@@ -32,4 +32,10 @@ class CalculatorApplicationTests {
 	public void checkSumOnNewLineDelimeter() {
 		assertEquals(13, Calculator.add("1,2\n10"));
 	}
+
+	@Test
+	public void checkSumOnCustomDelimeter() {
+		assertEquals(24, Calculator.add("//;\n2;20;2"));
+	}
+
 }
