@@ -9,8 +9,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 class CalculatorApplicationTests {
 
 	@Test
-	public void checkZeroOnnEmpty() {
+	public void checkZeroOnEmpty() {
 		assertEquals(0, Calculator.add(""));
 	}
 
+	@Test
+	public void checkNumberOnNumber() {
+		assertEquals(1, Calculator.add("1"));
+	}
 }
